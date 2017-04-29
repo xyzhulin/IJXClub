@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.ijiaxiang.dao.ManagerDao">
+    <!--设置domain类和数据库中表的字段一一对应，注意数据库字段和domain类中的字段名称不致，此处一定要！-->
+    <resultMap id="BaseResultMap" type="club.ijiaxiang.pojo.Manager">
+        <id column="mid" property="mid" jdbcType="INTEGER" />
+        <result column="mname" property="mname" jdbcType="CHAR" />
+        <result column="msex" property="msex" jdbcType="CHAR" />
+        <result column="mpwd" property="mpwd" jdbcType="CHAR" />
+        <result column="mpower" property="mpower" jdbcType="INTEGER" />
+        <result column="mreg_time" property="mregTime" jdbcType="CHAR" />
+        <result column="mimage" property="mimage" jdbcType="CHAR" />
+        <result column="mphone" property="mphone" jdbcType="CHAR" />
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            mid, mname, msex, mpwd, mpower, mreg_time, mimage, mphone,
+        </trim>
+    </sql>
+
+    <!-- 查询所有记录 -->
+    <select id="findAll" resultMap="BaseResultMap">
+        SELECT
+         <include refid="columnSql"></include>
+         FROM manager
+    </select>
+
+    <!--查询单条记录-->
+    <select id="findByPhoneAndPwd" resultMap="BaseResultMap">
+        SELECT
+            <include refid="columnSql"></include>
+            FROM manager WHERE mphone = #{mphone} AND mpwd = #{mpwd}
+    </select>
+</mapper>

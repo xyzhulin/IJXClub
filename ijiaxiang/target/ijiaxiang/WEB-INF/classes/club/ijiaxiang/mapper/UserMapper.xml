@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="club.ijiaxiang.dao.UserDao">
+    <resultMap id="BaseResultMap" type="club.ijiaxiang.pojo.User">
+        <id column="uid" property="uid" jdbcType="INTEGER"></id>
+        <result column="usex" property="uSex" jdbcType="CHAR" ></result>
+        <result column="uname" property="uName" jdbcType="CHAR"></result>
+        <result column="upwd" property="uPwd" jdbcType="CHAR"></result>
+        <result column="ubirthday" property="uBirthday" jdbcType="CHAR"></result>
+        <result column="uscore" property="uScore" jdbcType="INTEGER"></result>
+        <result column="uimage" property="uImage" jdbcType="CHAR"></result>
+        <result column="uphone" property="uPhone" jdbcType="CHAR"></result>
+    </resultMap>
+    
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            uid, uname, upwd, usex, ubirthday, uscore, uimage, uphone,
+        </trim>
+    </sql>
+    
+    <select id="findAllUser" resultMap="BaseResultMap">
+        SELECT <include refid="columnSql"></include>
+          FROM  users
+    </select>
+</mapper>
